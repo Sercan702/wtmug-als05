@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamera Çevirmeni</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <!-- Tesseract.js OCR Kütüphanesi CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kamera Çevirmeni</h1>
+            <p>Anında Kamera, Galeri ve Metin Çevirisi</p>
+        </header>
+
+        <main>
+            <!-- Hedef Dil Seçimi -->
+            <div class="control-group">
+                <label for="targetLang">Hedef Dil:</label>
+                <select id="targetLang">
+                    <option value="tr" selected>Türkçe</option>
+                    <option value="en">İngilizce</option>
+                    <option value="de">Almanca</option>
+                    <option value="fr">Fransızca</option>
+                    <option value="es">İspanyolca</option>
+                    <option value="ar">Arapça</option>
+                    <option value="ru">Rusça</option>
+                </select>
+            </div>
+
+            <!-- Kamera ve Medya Alanı -->
+            <div class="camera-section">
+                <video id="video" autoplay playsinline style="display:none;"></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <div id="previewContainer">
+                    <img id="imagePreview" alt="Önizleme" style="display:none;" />
+                </div>
+                <div class="button-group">
+                    <button id="startCameraBtn" class="btn primary">Kamerayı Aç</button>
+                    <button id="captureBtn" class="btn success" style="display:none;">Fotoğraf Çek & Çevir</button>
+                    <label for="galleryInput" class="btn secondary">Galeriden Seç</label>
+                    <input type="file" id="galleryInput" accept="image/*" style="display:none;">
+                </div>
+            </div>
+
+            <!-- Manuel Metin Girişi -->
+            <div class="manual-section">
+                <h3>Veya Metin Girin:</h3>
+                <textarea id="manualText" placeholder="Çevirmek istediğiniz yazıyı buraya yazın..."></textarea>
+                <button id="translateManualBtn" class="btn primary">Metni Çevir</button>
+            </div>
+
+            <!-- Sonuç Alanı -->
+            <div class="result-section">
+                <h3>Çeviri Sonucu</h3>
+                <div id="loading" class="loading" style="display:none;">İşleniyor (OCR ve Çeviri)...</div>
+                <div class="output-box">
+                    <strong>Algılanan / Girilen Metin:</strong>
+                    <p id="sourceTextOutput">-</p>
+                </div>
+                <div class="output-box">
+                    <strong>Çeviri:</strong>
+                    <p id="translatedTextOutput">-</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
